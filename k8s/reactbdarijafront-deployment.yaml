@@ -1,0 +1,25 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: reactbdarija-front
+  labels:
+    app: reactbdarija-front
+spec:
+  selector:
+    matchLabels:
+      app: reactbdarija-front
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: reactbdarija-front
+        tier: frontend
+    spec:
+      containers:
+      - image: techbdarija/reactbdarija-front
+        name: reactbdarija-front
+        ports:
+        - containerPort: 80
+          name: http
