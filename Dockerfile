@@ -1,7 +1,16 @@
-from nginx:1.17.8-alpine
+FROM nginx:1.17.8-alpine
 
-Workdir /usr/share/nginx/html
+RUN apk add --update nodejs npm
 
-ADD build /usr/share/nginx/html
+WORKDIR /app
+
+COPY . .
+
+RUN npm ci
+
+# ADD build /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html
 
 EXPOSE 80 443
+
+# npm run build && cp build /usr/share/nginx/html

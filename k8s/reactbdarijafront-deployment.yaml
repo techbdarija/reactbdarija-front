@@ -20,6 +20,13 @@ spec:
       containers:
       - image: techbdarija/reactbdarija-front
         name: reactbdarija-front
+        lifecycle:
+          postStart:
+            exec:
+              command: ['/bin/sh', '-c', 'cd /app && npm run build && cp -r /app/build/* /usr/share/nginx/html/']
+        env:
+          - name: REACT_APP_BASE_URL
+            value: //test.local.home
         ports:
         - containerPort: 80
           name: http
